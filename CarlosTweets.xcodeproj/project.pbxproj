@@ -33,6 +33,7 @@
 		BA2B3855247204AB00F6F704 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2B3853247204AB00F6F704 /* TweetTableViewCell.swift */; };
 		BA2B3856247204AB00F6F704 /* TweetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA2B3854247204AB00F6F704 /* TweetTableViewCell.xib */; };
 		BA2B385824721A8800F6F704 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2B385724721A8800F6F704 /* AddPostViewController.swift */; };
+		BA2B385A247351F900F6F704 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA2B3859247351F900F6F704 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		BA2B3853247204AB00F6F704 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		BA2B3854247204AB00F6F704 /* TweetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TweetTableViewCell.xib; sourceTree = "<group>"; };
 		BA2B385724721A8800F6F704 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		BA2B3859247351F900F6F704 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1E7A3321BCB2E2289A320A2 /* Pods-CarlosTweets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarlosTweets.release.xcconfig"; path = "Target Support Files/Pods-CarlosTweets/Pods-CarlosTweets.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 				BA2B381D2470526700F6F704 /* Modules */,
 				BA2B381C2470525B00F6F704 /* Commons */,
 				BA2B3816247049C600F6F704 /* Info.plist */,
+				BA2B3859247351F900F6F704 /* GoogleService-Info.plist */,
 			);
 			path = CarlosTweets;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				BA2B3820247052AB00F6F704 /* Welcome.storyboard in Resources */,
 				BA2B38292471EEEC00F6F704 /* Home.storyboard in Resources */,
 				BA2B382E2471F12700F6F704 /* Register.storyboard in Resources */,
+				BA2B385A247351F900F6F704 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
