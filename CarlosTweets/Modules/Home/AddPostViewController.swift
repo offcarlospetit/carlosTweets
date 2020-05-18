@@ -15,12 +15,18 @@ class AddPostViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var postTextView: UITextView!
+    @IBOutlet weak var previewImageView: UIImageView!
     
+    // MARK: - Properties
+    private var imagePicker: UIImagePickerController?
     
     // MARK: - IBActions functions
     @IBAction func addPostAction(_ sender: Any){
         savePost()
-        
+    }
+    
+    @IBAction func openCameraAction(_ sender: Any) {
+        openCamera()
     }
     
     @IBAction func dissmissActio(_ sender: Any){
@@ -65,5 +71,33 @@ class AddPostViewController: UIViewController {
         }
     }
     
+    private func openCamera(){
+        imagePicker = UIImagePickerController()
+        imagePicker?.sourceType = .camera
+        imagePicker?.cameraFlashMode = .off
+        imagePicker?.cameraCaptureMode = .photo
+        imagePicker?.allowsEditing = true
+        imagePicker?.delegate = self
+        
+        guard let imagePicker = imagePicker else {
+            return
+        }
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
     
+    
+}
+
+
+// MARK: - Extensions
+extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        imagePicker?.dismiss(animated: true, completion: nil)
+        if info.keys.contains(.originalImage){
+            previewImageView.isHidden = false
+            previewImageView.image = info[.originalImage] as? UIImage
+        }
+    }
 }
