@@ -35,6 +35,7 @@ class HomeViewController: UIViewController {
     //MARK: - Functions
     private func setUpUI() {
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UINib(nibName: "TweetTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
     }
     
@@ -47,17 +48,52 @@ class HomeViewController: UIViewController {
             // Cerramos indicador de carga
             SVProgressHUD.dismiss()
             switch response {
-                case .success(let posts):
-                    self.dataSource = posts
-                    self.tableView.reloadData()
+            case .success(let posts):
+                self.dataSource = posts
+                self.tableView.reloadData()
                 
-                case .error(let error):
-                    NotificationBanner(title: "Algo ha salido mal", subtitle: "\(error.localizedDescription)", style: .danger).show()
-                    return
+            case .error(let error):
+                NotificationBanner(title: "Algo ha salido mal", subtitle: "\(error.localizedDescription)", style: .danger).show()
+                return
                 
-                case .errorResult(let entity):
-                    NotificationBanner(title: "Error", subtitle: "\(entity.error.description)", style: .warning).show()
-                    return
+            case .errorResult(let entity):
+                NotificationBanner(title: "Error", subtitle: "\(entity.error.description)", style: .warning).show()
+                return
+                
+            }
+        }
+    }
+    
+    private func deletePostAt(indexpath: IndexPath){
+        // 1. Indicar Carga al usuario
+        SVProgressHUD.show()
+        
+        // 2. Obtener id del post que vamos a borrar
+        let postId = dataSource[indexpath.row].id
+        
+        // Servicio para borrar el post
+        let endPoint = Endpoints.delete + postId
+        SN.delete(endpoint: endPoint ) { (response: SNResultWithEntity<GeneralResponse, ErrorResponse>) in
+            // Cerramos indicador de carga
+            SVProgressHUD.dismiss()
+            print(response  )
+            switch response {
+            case .success:
+                //borrar el post del datasource
+                self.dataSource.remove(at: indexpath.row)
+                
+                // borrar la celda de la tabla
+                self.tableView.deleteRows(at: [indexpath], with: .fade)
+                
+                self.tableView.reloadData()
+                
+            case .error(let error):
+                NotificationBanner(title: "Algo ha salido mal", subtitle: "\(error.localizedDescription)", style: .danger).show()
+                return
+                
+            case .errorResult(let entity):
+                NotificationBanner(title: "Error", subtitle: "\(entity.error.description)", style: .warning).show()
+                return
                 
             }
         }
@@ -77,10 +113,28 @@ extension HomeViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         if let cell = cell as? TweetTableViewCell {
-           //Config cell
+            //Config cell
             cell.setUpCellWith(post: dataSource[indexPath.row])
             
         }
         return cell
     }
+}
+
+extension HomeViewController: UITableViewDelegate{
+    
+    //Eliminar row
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: UITableViewRowAction.Style.destructive, title: "Borrar") { (_, _) in
+            self.deletePostAt(indexpath: indexPath)
+        }
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let defaults = UserDefaults.standard
+        let email = defaults.string(forKey: "usermail")
+        return dataSource[indexPath.row].author.email == email
+    }
+    
 }
