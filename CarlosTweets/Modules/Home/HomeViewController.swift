@@ -10,6 +10,7 @@ import UIKit
 import Simple_Networking
 import SVProgressHUD
 import NotificationBannerSwift
+import AVKit
 
 class HomeViewController: UIViewController {
     
@@ -115,6 +116,16 @@ extension HomeViewController: UITableViewDataSource{
         if let cell = cell as? TweetTableViewCell {
             //Config cell
             cell.setUpCellWith(post: dataSource[indexPath.row])
+            cell.needsToShowVideo = { url in
+                // Aqui si deberiamos abrir un view controller
+                       let avPlayer = AVPlayer(url: url)
+                       let avPlayerController = AVPlayerViewController()
+                       avPlayerController.player = avPlayer
+                       
+                self.present(avPlayerController, animated: true) {
+                           avPlayerController.player?.play()
+                       }
+            }
             
         }
         return cell

@@ -42,5 +42,7 @@
     
     <key>NSCameraUsageDescription</key>
     <string>Usaremos la cámara para publicar tu Tweet. Saludos Maquina!</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Usaremos el microfono Crack! :)</string>
 </dict>
 </plist>

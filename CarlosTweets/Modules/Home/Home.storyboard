@@ -67,7 +67,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JVW-zT-vOP">
-                                <rect key="frame" x="20" y="127" width="374" height="229"/>
+                                <rect key="frame" x="20" y="127" width="374" height="271"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vgw-Fa-u6b">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
@@ -90,8 +90,18 @@
                                             <action selector="openCameraAction:" destination="P6T-MP-acI" eventType="touchUpInside" id="dqj-dz-N7T"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juI-m8-epr">
+                                        <rect key="frame" x="0.0" y="182" width="374" height="22"/>
+                                        <color key="tintColor" red="0.62352941179999999" green="0.74117647060000003" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Ver video" image="video.fill" catalog="system">
+                                            <color key="titleColor" red="0.62352941179999999" green="0.74117647060000003" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="previewAction:" destination="P6T-MP-acI" eventType="touchUpInside" id="84X-th-csA"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bf-V3-aTz">
-                                        <rect key="frame" x="0.0" y="182" width="374" height="47"/>
+                                        <rect key="frame" x="0.0" y="224" width="374" height="47"/>
                                         <color key="backgroundColor" red="0.62352941179999999" green="0.74117647060000003" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="gNm-8t-omW"/>
@@ -105,7 +115,7 @@
                                         </connections>
                                     </button>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VLh-qJ-a0F">
-                                        <rect key="frame" x="0.0" y="229" width="374" height="200"/>
+                                        <rect key="frame" x="0.0" y="271" width="374" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="Vhf-Ow-hWw"/>
                                         </constraints>
@@ -138,6 +148,7 @@
                     <connections>
                         <outlet property="postTextView" destination="vgw-Fa-u6b" id="NyX-hi-O6B"/>
                         <outlet property="previewImageView" destination="VLh-qJ-a0F" id="c1Y-O8-S5L"/>
+                        <outlet property="videoButton" destination="juI-m8-epr" id="h9t-by-gC6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zPd-bH-BcW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
