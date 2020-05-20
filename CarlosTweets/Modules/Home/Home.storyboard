@@ -36,7 +36,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h1r-bH-D7a"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Tweets" id="L7d-pe-Odz"/>
+                    <navigationItem key="navigationItem" title="Tweets" id="L7d-pe-Odz">
+                        <barButtonItem key="rightBarButtonItem" title="Ver Mapa" image="map" catalog="system" id="Ejd-Jb-QSn">
+                            <connections>
+                                <segue destination="JO7-vK-LXz" kind="show" identifier="goToMapView" id="5Vi-w9-2vX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="FOS-UB-8tt" id="6qM-jY-yhz"/>
                     </connections>
@@ -44,6 +50,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wdz-QK-IRb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1114.4927536231885" y="141.96428571428569"/>
+        </scene>
+        <!--Mapa-->
+        <scene sceneID="63g-8Y-kZE">
+            <objects>
+                <viewController id="JO7-vK-LXz" customClass="MapViewController" customModule="CarlosTweets" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f4p-JW-96a">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F9p-pX-q9J">
+                                <rect key="frame" x="0.0" y="140" width="414" height="756"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="F9p-pX-q9J" firstAttribute="top" secondItem="eE3-eE-aIZ" secondAttribute="top" id="26C-rs-DzU"/>
+                            <constraint firstAttribute="bottom" secondItem="F9p-pX-q9J" secondAttribute="bottom" id="BxK-c7-H2G"/>
+                            <constraint firstItem="F9p-pX-q9J" firstAttribute="leading" secondItem="eE3-eE-aIZ" secondAttribute="leading" id="noY-FA-GKK"/>
+                            <constraint firstItem="F9p-pX-q9J" firstAttribute="trailing" secondItem="eE3-eE-aIZ" secondAttribute="trailing" id="sxk-4R-Zae"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eE3-eE-aIZ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Mapa" id="nTc-0P-Tp2"/>
+                    <connections>
+                        <outlet property="mapViewContainer" destination="F9p-pX-q9J" id="rxb-ah-MaL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UpV-Up-iVK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1947.826086956522" y="-388.39285714285711"/>
         </scene>
         <!--Add Post View Controller-->
         <scene sceneID="YtQ-aJ-IGo">
@@ -75,7 +112,6 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="Ttt-qt-7YV"/>
                                         </constraints>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -176,6 +212,7 @@
     </scenes>
     <resources>
         <image name="bottomImage" width="703" height="246"/>
+        <image name="map" catalog="system" width="128" height="113"/>
         <image name="video.fill" catalog="system" width="128" height="82"/>
     </resources>
 </document>

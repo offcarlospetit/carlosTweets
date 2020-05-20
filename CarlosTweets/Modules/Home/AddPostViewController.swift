@@ -14,6 +14,7 @@ import FirebaseStorage
 import AVFoundation
 import AVKit
 import MobileCoreServices
+import CoreLocation
 
 class AddPostViewController: UIViewController {
     
@@ -25,12 +26,18 @@ class AddPostViewController: UIViewController {
     // MARK: - Properties
     private var imagePicker: UIImagePickerController?
     private var currentVideoURL: URL?
+    private var locationManager: CLLocationManager?
+    private var userLocation: CLLocation?
     
     // MARK: - IBActions functions
     @IBAction func addPostAction(_ sender: Any){
-                uploadVideoToFirebase()
-        //        openVideoCamera()
-        
+        if currentVideoURL != nil {
+            uploadVideoToFirebase()
+        }
+        if previewImageView.image != nil {
+            uploadPhotoToFirebase()
+        }
+        savePost(imageUrl: nil, videoURL: nil)
     }
     
     @IBAction func openCameraAction(_ sender: Any) {
@@ -67,6 +74,7 @@ class AddPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         videoButton.isHidden = true
+        requestLocation()
         // Do any additional setup after loading the view.
     }
     
@@ -74,12 +82,19 @@ class AddPostViewController: UIViewController {
     private func savePost(imageUrl: String?, videoURL: String?){
         //Indicar carga al usuario
         SVProgressHUD.show()
+        var postLocation: PostRequestLocation?
+        
+        //crear un request de localizacion
+        if let userLocation = userLocation {
+            postLocation = PostRequestLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+        }
+        
         
         // crear un request
         guard let textTweet = postTextView.text else{
             return
         }
-        let request = PostRequest(text: textTweet, imageUrl: imageUrl, videoUrl: videoURL, location: nil)
+        let request = PostRequest(text: textTweet, imageUrl: imageUrl, videoUrl: videoURL, location: postLocation)
         
         
         // Llamar al servicio del post
@@ -214,6 +229,19 @@ class AddPostViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
+    private func requestLocation(){
+        // Validamos que tenga el gps activo y disponible
+        guard CLLocationManager.locationServicesEnabled() else {
+            return
+        }
+        
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.startUpdatingLocation()
+    }
+    
     
 }
 
@@ -235,5 +263,16 @@ extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationCo
             videoButton.isHidden = false
         }
         
+    }
+}
+
+
+extension AddPostViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let bestLocation = locations.last else {
+            return
+        }
+        //Ya tenemos la ubicacion del usuario 😬
+        userLocation = bestLocation
     }
 }

@@ -3,6 +3,16 @@
     {
       "filename" : "bottomImage.jpg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "bottomImage_dark.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {
